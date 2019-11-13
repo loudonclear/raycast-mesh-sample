@@ -19,8 +19,8 @@ public:
 private:
     int m_width, m_height;
 
-    glm::vec3 tracePixel(int x, int y, const Mesh& mesh, const glm::mat4x4 &invViewMatrix, std::vector<glm::vec3> &hits);
-    glm::vec3 traceRay(const Ray& r, const Mesh& mesh, std::vector<glm::vec3> &hits);
+    void tracePixel(int x, int y, const Mesh& mesh, const glm::mat4x4 &invViewMatrix, std::vector<glm::vec3> &hits);
+    void traceRay(const Ray& r, const Mesh& mesh, std::vector<glm::vec3> &hits);
 };
 
 #endif // TRACER_H

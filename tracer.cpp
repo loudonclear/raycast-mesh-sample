@@ -14,16 +14,16 @@ void Tracer::traceScene(const Mesh& mesh, const std::vector<BasicCamera> &cams, 
     for (const BasicCamera &cam : cams) {
 	glm::mat4x4 invViewMat = glm::inverse(cam.getScaleMatrix() * cam.getViewMatrix());
 
-	for(int y = 0; y < m_height; ++y) {
-	    //#pragma omp parallel for
- 	    for(int x = 0; x < m_width; ++x) {
-		tracePixel(x, y, mesh, invViewMat, hits);
-	    }
-	}
+        for(int y = 0; y < m_height; ++y) {
+            //#pragma omp parallel for
+            for(int x = 0; x < m_width; ++x) {
+                tracePixel(x, y, mesh, invViewMat, hits);
+            }
+        }
     }
 }
 
-glm::vec3 Tracer::tracePixel(int x, int y, const Mesh& mesh, const glm::mat4x4 &invViewMatrix, std::vector<glm::vec3> &hits)
+void Tracer::tracePixel(int x, int y, const Mesh& mesh, const glm::mat4x4 &invViewMatrix, std::vector<glm::vec3> &hits)
 {
     glm::vec3 p(0, 0, 0);
     glm::vec3 d((2.f * x / m_width) - 1, 1 - (2.f * y / m_height), -1);
@@ -34,7 +34,7 @@ glm::vec3 Tracer::tracePixel(int x, int y, const Mesh& mesh, const glm::mat4x4 &
     return traceRay(r, mesh, hits);
 }
 
-glm::vec3 Tracer::traceRay(const Ray& r, const Mesh& mesh, std::vector<glm::vec3> &hits)
+void Tracer::traceRay(const Ray& r, const Mesh& mesh, std::vector<glm::vec3> &hits)
 {
     IntersectionInfo i;
     Ray ray(r);

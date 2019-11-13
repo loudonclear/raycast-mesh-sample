@@ -3,6 +3,8 @@
 #ifndef TRIANGLE_H
 #define TRIANGLE_H
 
+#define GLM_ENABLE_EXPERIMENTAL
+
 #include <BVH/Object.h>
 
 class Triangle : public Object
